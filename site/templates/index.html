@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form
+                action="/" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <input name="s" type="text" class="form-control bg-light border-0 small" placeholder="Ticker..."
+                        aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <input value="Search" type="submit" class="btn btn-primary">
+                        </input>
+                    </div>
+                </div>
+            </form>
+
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+
+            <div class="row">
+            	
+            	<div class="col-lg-4 mb-5">
+                    <h1 class="h3 text-gray-800 mb-5 mt-1">Long-Term Price Predictions {{ date.year }}-{{ date.year+12 }}</h1>
+            		{% if search %}
+                    <h5>The search results for "{{ pattern }}"</h6>
+                    {% else %}
+                    <h5>The List Of All Forecasts</h6>
+                    {% endif %}
+                    {% if data %}
+            		<div class="card">
+            			<ul style="list-style: none;" class="ticker__block mt-3">
+                            {% for ticker in data %}
+                            <li class='mr-5 ml-5 ticker__item'>
+                                <img class="m-1 ticker-mini" style="height:1.5em" src="{{ url_for('static',filename='img/coins_mini')}}/{{ ticker['ticker'].lower() }}.png">
+                                <a href="/ticker_{{ ticker['ticker'].lower() }}">{{ ticker['name'] }} <span class='ticker__invisible'>Price Prediction</span></a>
+                            </li>
+                            {% endfor %}
+            			</ul>
+            		</div>
+                    {% else %}
+                    <div class="card">
+                        <h6 class="m-3">Sorry can't find the any tickers already :(</h6>
+                    </div>
+                    <br>
+                    {% if search %}
+                    <a class="ml-2" href="/">Go home...</a>
+                    {% endif %}
+                    {% endif %}
+            	</div>
+                {% if not search %}
+                <div class="col-lg-8">
+                    <h2>About Our Forecast Center</h2>
+                    <p>Forecasting accuracy is a key metric for our customers. We are constantly improving it with the continual introduction of newer data science and machine learning techniques.</p>
+
+                    <p>
+                        <img class="card" style="height:40vh;width:100%;object-fit: cover;" src="{{ url_for('static',filename='img/bg_bitcoin.jpg') }}" alt="Error">
+                    </p>
+
+                    <p>Self-learning technology is different than traditional programming. The system uses prediction models, a set of parameters that the computer can use to make decisions, and a learning component that allows the system to change the parameters based on experience. Over time, a computer transforms its own model and parameters to fit its experience with forecasts and real-world outcomes.</p>
+                    <p>Codes behind deep learning technology combine time series data, media news, regulator activities, coin events (like forks), and traded volumes on the exchanges and their liquidity, etc. The smart system automates the work, leaving human experts to focus on aspects requiring expert judgment and such non-cognitive abilities as social perception and empathy. So, this gives the forecasting system an ability to optimize the results.</p>
+                    <p>Our mission is the independent and objective analysis of the cryptocurrency market, and an elaboration of forecasting methodology using the latest innovations.</p>
+                {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
+
+{% endblock %}

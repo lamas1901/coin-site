@@ -1,0 +1,25 @@
+.my-gold{
+    color: gold;
+}
+
+.ticker-mini{
+    height: 10px;
+    width: 26px;
+}
+
+.ticker-big{
+    height: 60px !important;
+}
+
+@media (max-width:500px){
+    .ticker__block{
+        padding: 0;
+    }
+    .ticker__item{
+        width: fit-content;
+        margin: 10px 0 0 10px;
+    }
+    .ticker__invisible{
+        display: none;
+    }
+}
